@@ -1,4 +1,4 @@
-### 1 代码位置[here](grid_path_searcher)
+### 1 代码位置[here](./grid_path_searcher)
 ---
 ### 2 算法流程
 &emsp;&emsp;老师讲的蛮详细的，我这里就是简单翻译
@@ -23,9 +23,9 @@
 
 ### 3 运行结果
 运行效果  
-![alt 运行效果](img/01.png)  
+![alt 运行效果](./img/01.png)  
 去除障碍物效果  
-![alt 去除障碍物效果](img/02.png)
+![alt 去除障碍物效果](./img/02.png)
 ---
 ### 4 对比不同启发函数
 &emsp;&emsp; 考虑调用同一个点，对比效果,但也受到地图环境变换生成的影响,故通过topic修改计算h的方法.
@@ -121,7 +121,7 @@ JPS
 | visited_nodes |    584    |       584 |      584 |
 
 &emsp;&emsp; 从测试结果看JPS的数据Manhattan测试结果仍是最优，除Manhattan外。JPS的时间效率提高了1倍到19倍。另外猜测JPSGetSucc实现有问题。如老师讲的
-![alt ](img/03.png)
+![alt ](./img/03.png)
 当发现目标点，需讲目标点作为强制相邻点，但
 ```
 JPSGetSucc(currentPtr, neighborPtrSets,
