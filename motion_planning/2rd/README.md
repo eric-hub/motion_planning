@@ -122,6 +122,7 @@ JPS
 
 &emsp;&emsp; 从测试结果看JPS的数据Manhattan测试结果仍是最优，除Manhattan外。JPS的时间效率提高了1倍到19倍。另外猜测JPSGetSucc实现有问题。如老师讲的
 ![03.png](./img/03.png)
+
 当发现目标点，需讲目标点作为强制相邻点，但
 ```
 JPSGetSucc(currentPtr, neighborPtrSets,
