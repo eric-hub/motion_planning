@@ -7,7 +7,7 @@ JPS3DNeib::JPS3DNeib() {
     for (int dy = -1; dy <= 1; ++dy) {
       for (int dx = -1; dx <= 1; ++dx) {
         int norm1 = abs(dx) + abs(dy) + abs(dz);
-
+        std::cout << id << " " << dx << " " << dy << " " << dz << std::endl;
         for (int dev = 0; dev < nsz[norm1][0]; ++dev)
           Neib(dx, dy, dz, norm1, dev, ns[id][0][dev], ns[id][1][dev],
                ns[id][2][dev]);
@@ -21,6 +21,15 @@ JPS3DNeib::JPS3DNeib() {
       }
     }
   }
+  // for (int(&r)[3][26] : ns) {
+  //   for (int(&p)[26] : r) {
+  //     for (int &q : p) {
+  //       std::cout << q << ' ';
+  //     }
+  //     std::cout << std::endl;
+  //   }
+  //   std::cout << std::endl;
+  // }
 }
 
 void JPS3DNeib::Neib(int dx, int dy, int dz, int norm1, int dev, int &tx,

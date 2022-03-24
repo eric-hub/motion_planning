@@ -263,6 +263,11 @@ void JPSPathFinder::JPSGraphSearch(Eigen::Vector3d start_pt,
       *
       */
       GridNodePtr neighborPtr = neighborPtrSets[i];
+      for (int i = 0; i < 3; i++) {
+        neighborPtr->dir(i) = neighborPtr->index(i) - currentPtr->index(i);
+        if (neighborPtr->dir(i) != 0)
+          neighborPtr->dir(i) /= abs(neighborPtr->dir(i));
+      }
       if (neighborPtr->id == 0) { // discover a new node
                                   /*
                                   *
@@ -311,12 +316,6 @@ void JPSPathFinder::JPSGraphSearch(Eigen::Vector3d start_pt,
           neighborPtr->fScore = neighborPtr->fScore + neighborPtr->gScore;
           neighborPtr->cameFrom = currentPtr;
           openSet.insert(make_pair(neighborPtr->fScore, neighborPtr));
-
-          for (int i = 0; i < 3; i++) {
-            neighborPtr->dir(i) = neighborPtr->index(i) - currentPtr->index(i);
-            if (neighborPtr->dir(i) != 0)
-              neighborPtr->dir(i) /= abs(neighborPtr->dir(i));
-          }
         }
       }
     }

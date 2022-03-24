@@ -117,7 +117,7 @@ void rcvSetTie(const std_msgs::Int8::ConstPtr &msg) {
 }
 
 void pathFinding(const Vector3d start_pt, const Vector3d target_pt) {
-  // #define _use_astar 1
+  // #define _use_astar 0
   // #if _use_astar
   // Call A* to search for a path
   _astar_path_finder->AstarGraphSearch(start_pt, target_pt);
