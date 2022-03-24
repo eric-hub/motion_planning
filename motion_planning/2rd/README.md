@@ -121,3 +121,12 @@ JPS
 | visited_nodes |    584    |       584 |      584 |
 
 &emsp;&emsp; 从测试结果看JPS的数据Manhattan测试结果仍是最优，除Manhattan外，时间效率提高了1倍到19倍。因JPS每个点搜索dir方向上的相邻点，及forced point,所以搜索效率提高。
+
+---
+在极致空旷的环境下 
+![04.png](img/04.png)
+|               | A^*^_Euclidean |      JPS |
+| ------------- | -------------: | -------: |
+| Time          |       4.918582 | 6.135275 |
+| visited_nodes |            400 |        7 |
+&emsp;&emsp; JPS访问点少2个数量级，但是生成任务时间大于A^*^。
