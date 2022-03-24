@@ -4,8 +4,8 @@
 &emsp;&emsp;老师讲的蛮详细的，我这里就是简单翻译
 * 1. 维护优先级列表存储所有扩展节点
 * 2. 计算n的触发函数h(n)
-* 3. 在初始时候讲开始节点加入优先级队列X<sub>s</sub>
-* 4. 初始节点的g(X<sub>s</sub>)为0,其他节点g(n)为inf
+* 3. 在初始时候讲开始节点加入优先级队列X~s~
+* 4. 初始节点的g(X~s~)为0,其他节点g(n)为inf
 * 5. 循环
   * (1) 如队列为空，退出循环
   * (2) f(n) = g(n)+h(n) 选择最小的f(n)的key,从队列中删除
@@ -107,8 +107,8 @@ after
 ### 6 遇到的问题
 &emsp;&emsp;主要是原始代码的变量含义比较模糊，如edgeCostSets，多次猜测验证后，才确认含义。另外个人觉得mutilmap做优化队列太过复杂，不过应该也是最简单的。
 ### 7 JPS实现
-&emsp;&emsp;与A<sup>*</sup>实现类似。  
-A<sup>*</sup>  
+&emsp;&emsp;与A^*^  实现类似。  
+A^*^  
 |               | Manhattan | Euclidean | Diagonal |
 | ------------- | :-------: | --------: | -------: |
 | Time          | 0.340099  | 38.762372 | 6.569357 |
@@ -120,13 +120,4 @@ JPS
 | Time          | 3.908311  |  2.419027 | 3.759877 |
 | visited_nodes |    584    |       584 |      584 |
 
-&emsp;&emsp; 从测试结果看JPS的数据Manhattan测试结果仍是最优，除Manhattan外。JPS的时间效率提高了1倍到19倍。另外猜测JPSGetSucc实现有问题。如老师讲的
-![03.png](./img/03.png)
-
-当发现目标点，需讲目标点作为强制相邻点，但
-```
-JPSGetSucc(currentPtr, neighborPtrSets,
-               edgeCostSets); // we have done it for you
-```
-这个方法压根没有传目标节点。  
-另外<font color=#FF000 >JPS3DNeib能否讲解一下，本来想修改JPSGetSucc方法，但是JPS3DNeib太复杂了，大概知道平面，直线，对角等定义扩展数量和方向，但实现看的晕头转向，能否帮忙讲解下，万分感谢！！！</font>
+&emsp;&emsp; 从测试结果看JPS的数据Manhattan测试结果仍是最优，除Manhattan外，时间效率提高了1倍到19倍。因JPS每个点搜索dir方向上的相邻点，及forced point,所以搜索效率提高。
