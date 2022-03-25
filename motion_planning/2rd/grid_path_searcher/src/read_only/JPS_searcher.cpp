@@ -48,7 +48,8 @@ inline void JPSPathFinder::JPSGetSucc(GridNodePtr currentPtr,
     nodePtr->dir = expandDir;
 
     neighborPtrSets.push_back(nodePtr);
-    edgeCostSets.push_back(sqrt((neighborIdx(0) - currentPtr->index(0)) *
+    edgeCostSets.push_back(resolution *
+                           sqrt((neighborIdx(0) - currentPtr->index(0)) *
                                     (neighborIdx(0) - currentPtr->index(0)) +
                                 (neighborIdx(1) - currentPtr->index(1)) *
                                     (neighborIdx(1) - currentPtr->index(1)) +
@@ -250,6 +251,7 @@ void JPSPathFinder::JPSGraphSearch(Eigen::Vector3d start_pt,
     loop please write your code below
     *
     */
+    // std::cout << neighborPtrSets.size() << std::endl;
     for (int i = 0; i < (int)neighborPtrSets.size(); i++) {
       /*
       *

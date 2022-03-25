@@ -157,6 +157,7 @@ inline void AstarPathFinder::AstarGetSucc(GridNodePtr currentPtr,
 
           neighborPtrSets.push_back(tmpGridNodePtr);
           edgeCostSets.push_back(
+              resolution *
               sqrt((i - currentPtr->index(0)) * (i - currentPtr->index(0)) +
                    (j - currentPtr->index(1)) * (j - currentPtr->index(1)) +
                    (k - currentPtr->index(2)) * (k - currentPtr->index(2))));
