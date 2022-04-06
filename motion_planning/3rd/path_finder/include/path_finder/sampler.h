@@ -25,6 +25,9 @@ OF SUCH DAMAGE.
 #include <random>
 #include <ros/ros.h>
 
+// const double M_M_PI = 3.14159265358979323846;
+// const double M_M_PI_2 = 2 * M_M_PI;
+
 class BiasSampler {
 public:
   BiasSampler() {
@@ -33,6 +36,9 @@ public:
     uniform_rand_ = std::uniform_real_distribution<double>(0.0, 1.0);
     uniform_rand2_ = std::uniform_real_distribution<double>(-1.0, 1.0);
     normal_rand_ = std::normal_distribution<double>(0.0, 1.0);
+    uniform_phi_ = std::uniform_real_distribution<double>(0.0, 2.0 * M_PI);
+    uniform_theta_ = std::uniform_real_distribution<double>(0.0, M_PI);
+
     range_.setZero();
     origin_.setZero();
   };
@@ -52,9 +58,16 @@ public:
   };
 
   void samplingOnce2(Eigen::Vector3d &sample) {
-    sample[0] = uniform_rand2_(gen_);
-    sample[1] = uniform_rand2_(gen_);
-    sample[2] = uniform_rand2_(gen_);
+    double radius = normal_rand_(gen_);
+    double theta = uniform_theta_(gen_);
+    double phi = uniform_phi_(gen_);
+
+    // sample[0] = uniform_rand2_(gen_);
+    // sample[1] = uniform_rand2_(gen_);
+    // sample[2] = uniform_rand2_(gen_);
+    sample[0] = radius * sin(theta) * cos(phi);
+    sample[1] = radius * sin(theta) * sin(phi);
+    sample[2] = radius * cos(theta);
     // sample.array() *= range_.array();
     // sample += origin_;
   };
@@ -65,7 +78,8 @@ public:
 private:
   Eigen::Vector3d range_, origin_;
   std::mt19937_64 gen_;
-  std::uniform_real_distribution<double> uniform_rand_, uniform_rand2_;
+  std::uniform_real_distribution<double> uniform_rand_, uniform_rand2_,
+      uniform_phi_, uniform_theta_;
   std::normal_distribution<double> normal_rand_;
 };
 
