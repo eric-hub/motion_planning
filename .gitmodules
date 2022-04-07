@@ -1,3 +1,0 @@
-[submodule "motion_planning"]
-	path = motion_planning
-	url = git@github.com:eric-hub/motion_planning.git
