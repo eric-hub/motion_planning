@@ -13,6 +13,7 @@ J导数求根及J值计算[here](./grid_path_searcher/src/hw_tool.cpp#L105)
 ![04.png](images/04.png)
 按照公式  
 $$\lambda_j=\frac{\partial h(S^*(T))}{\partial S_j},    for j!=i$$ 
+![06.png](images/06.png)
 所以对于V来说$\lambda(T)=0$就是偏导的极值,即代码推到中的c)中关于V的部分为0。公式就修改为  
 $$\begin{bmatrix}
 \frac{1}{6}T^3 & 0  & 0& \frac{1}{2}T^2 &  0 &  0\\
