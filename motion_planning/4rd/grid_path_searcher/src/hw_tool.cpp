@@ -85,6 +85,8 @@ Eigen::Vector3d Homeworktool::coordRounding(const Eigen::Vector3d &coord) {
 double Homeworktool::OptimalBVP(Eigen::Vector3d _start_position,
                                 Eigen::Vector3d _start_velocity,
                                 Eigen::Vector3d _target_position) {
+  std::cout << _start_position.transpose() << "|" << _start_velocity.transpose()
+            << "|" << _target_position.transpose() << std::endl;
   double optimal_cost =
       100000; // this just to initial the optimal_cost, you can delete it
   /*

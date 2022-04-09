@@ -137,6 +137,9 @@ void trajectoryLibrary(const Vector3d start_pt, const Vector3d start_velocity,
             double(k * (2 * _max_input_acc / double(_discretize_step)) +
                    0.1); // acc_input_az >0.1
 
+        std::cout << "--------------------------" << std::endl;
+        std::cout << acc_input.transpose() << std::endl;
+
         pos(0) = start_pt(0);
         pos(1) = start_pt(1);
         pos(2) = start_pt(2);
@@ -159,15 +162,18 @@ void trajectoryLibrary(const Vector3d start_pt, const Vector3d start_velocity,
           been given use the pos and vel to recored the steps in the trakectory
           */
 
-          vel(0) = vel(0) + acc_input(0) * delta_time;
-          vel(1) = vel(1) + acc_input(1) * delta_time;
-          vel(2) = vel(1) + acc_input(1) * delta_time;
-          pos(0) = pos(0) + vel(0) * delta_time +
-                   (1 / 2) * acc_input(0) * delta_time * delta_time;
-          pos(1) = pos(1) + vel(1) * delta_time +
-                   (1 / 2) * acc_input(1) * delta_time * delta_time;
-          pos(2) = pos(2) + vel(2) * delta_time +
-                   (1 / 2) * acc_input(2) * delta_time * delta_time;
+          vel(0) = vel(0) + acc_input(0) * delta_time * (step + 1);
+          vel(1) = vel(1) + acc_input(1) * delta_time * (step + 1);
+          vel(2) = vel(2) + acc_input(2) * delta_time * (step + 1);
+          pos(0) = pos(0) + vel(0) * delta_time * (step + 1) +
+                   (1 / 2) * acc_input(0) * delta_time * delta_time *
+                       (step + 1) * (step + 1);
+          pos(1) = pos(1) + vel(1) * delta_time * (step + 1) +
+                   (1 / 2) * acc_input(1) * delta_time * delta_time *
+                       (step + 1) * (step + 1);
+          pos(2) = pos(2) + vel(2) * delta_time * (step + 1) +
+                   (1 / 2) * acc_input(2) * delta_time * delta_time *
+                       (step + 1) * (step + 1);
 
           Position.push_back(pos);
           Velocity.push_back(vel);
