@@ -9,7 +9,4 @@
 图片效果  
 ![01.png](images/01.png)
 视频效果  
-<video id="video" controls="" preload="none" poster="images/01.mp4">
-    <source id="mp4" src="images/01.mp4" type="video/mp4">
-</video>
-<iframe height=498 width=510 src="images/01.mp4">
+![01.gif](images/01.gif)
