@@ -124,10 +124,10 @@ void minimumJerkTrajGen(
 
   //   coefficientMatrix = matrix_M.ldlt().solve(matrix_b);
   // coefficientMatrix = matrix_M.inverse() * matrix_b;
-  // coefficientMatrix = (matrix_M.transpose() * matrix_M)
-  //                         .ldlt()
-  //                         .solve(matrix_M.transpose() * matrix_b);
-  coefficientMatrix = matrix_M.fullPivLu().solve(matrix_b);
+  coefficientMatrix = (matrix_M.transpose() * matrix_M)
+                          .ldlt()
+                          .solve(matrix_M.transpose() * matrix_b);
+
   // ------------------------ Put your solution above ------------------------
 }
 
