@@ -76,12 +76,19 @@ private:
         // x_{k+1} = Ad * x_{k} + Bd * u_k + gd
         // TODO: set values to Ad_, Bd_, gd_
         // ...
-        Ad_ << 1, 0, -dt_ * v * std::sin(phi), dt_ * std::cos(phi), 0, 1, dt_ * v * std::cos(phi), dt_ * std::sin(phi),
-            0, 0, 1, dt_ * std::tan(delta) / ll_, 0, 0, 0, 1;
-        Bd_ << 0, 0, 0, 0, 0, dt_ * v / (ll_ * std::cos(delta) * std::cos(delta)), dt_ * 1.0, 0;
+        Ad_ << 1, 0, -dt_ * v * std::sin(phi), dt_ * std::cos(phi),
+            0, 1, dt_ * v * std::cos(phi), dt_ * std::sin(phi),
+            0, 0, 1, dt_ * std::tan(delta) / ll_,
+            0, 0, 0, 1;
+        Bd_ << 0, 0,
+            0, 0,
+            0, dt_ * v / (ll_ * std::cos(delta) * std::cos(delta)),
+            dt_ * 1.0, 0;
 
-        gd_ << dt_ * v * phi * std::sin(phi), -dt_ * v * phi * std::cos(phi),
-            -dt_ * v * delta / (ll_ * std::cos(delta) * std::cos(delta)), 0;
+        gd_ << dt_ * v * phi * std::sin(phi),
+            -dt_ * v * phi * std::cos(phi),
+            -dt_ * v * delta / (ll_ * std::cos(delta) * std::cos(delta)),
+            0;
         return;
     }
 
@@ -134,7 +141,8 @@ private:
     }
 
 public:
-    MpcCar(ros::NodeHandle& nh) : nh_(nh) {
+    MpcCar(ros::NodeHandle& nh)
+        : nh_(nh) {
         // load map
         std::vector<double> track_points_x, track_points_y;
         nh.getParam("track_points_x", track_points_x);
@@ -203,8 +211,8 @@ public:
             uu_.coeffRef(i * 3 + 1, 0) = delta_max_;
 
             Cu_.coeffRef(i * 3 + 2, i * m + 1) = 1;
-            lu_.coeffRef(i * 3 + 2, 0) = -ddelta_max_ / dt_;
-            uu_.coeffRef(i * 3 + 2, 0) = ddelta_max_ / dt_;
+            lu_.coeffRef(i * 3 + 2, 0) = -ddelta_max_ * dt_;
+            uu_.coeffRef(i * 3 + 2, 0) = ddelta_max_ * dt_;
             if (0 != i) {
                 Cu_.coeffRef(i * 3 + 2, (i - 1) * m + 1) = -1;
             }
@@ -245,6 +253,7 @@ public:
         double phi, v, delta;
         double last_phi = x0(2);
         Eigen::SparseMatrix<double> qx;
+
         qx.resize(n * N_, 1);
         for (int i = 0; i < N_; ++i) {
             calLinPoint(s0, phi, v, delta);
