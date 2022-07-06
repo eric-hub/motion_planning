@@ -362,6 +362,7 @@ void AstarPathFinder::AstarGraphSearch(Vector3d start_pt, Vector3d end_pt) {
             GridNodePtr tmpNode = it->second;
             if (tmpNode->index == neighborPtr->index) {
               openSet.erase(it);
+	      tmpNode->id = -1;
               break;
             }
             it++;
