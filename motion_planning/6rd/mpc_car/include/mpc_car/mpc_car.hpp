@@ -102,7 +102,7 @@ private:
         double dphi = (ddy * dx - dy * ddx) / (dx * dx + dy * dy);
         phi = atan2(dy, dx);
         v = desired_v_;
-        delta = atan2(ll_ * dphi, 1.0);
+        delta = atan2(ll_ * dphi, v);
     }
 
     inline VectorX diff(const VectorX& state, const VectorU& input) const {
@@ -306,8 +306,13 @@ public:
 
             qx.coeffRef(i * n, 0) = -xy(0);
             qx.coeffRef(i * n + 1, 0) = -xy(1);
-            qx.coeffRef(i * n + 2, 0) = -phi;
-            qx.coeffRef(i * n + 3, 0) = -v;
+            qx.coeffRef(i * n + 2, 0) = -rho_ * phi;
+            if (i == N_ - 1) {
+                qx.coeffRef(i * n, 0) *= rhoN_;
+                qx.coeffRef(i * n + 1, 0) *= rhoN_;
+                qx.coeffRef(i * n + 2, 0) *= rhoN_;
+            }
+            // qx.coeffRef(i * n + 3, 0) = -v;
 
             s0 += desired_v_ * dt_;
             s0 = s0 < s_.arcL() ? s0 : s_.arcL();
